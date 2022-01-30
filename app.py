@@ -1,11 +1,10 @@
 from io import BytesIO
-from flask import Flask, render_template, request, redirect, send_file, flash, send_from_directory, current_app
+from flask import Flask, render_template, request, redirect, send_file, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
-
 # UPLOAD_FOLDER = '/path/to/the/uploads'
-# ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+# ALLOWED_EXTENSIONS = {'xml', 'pdf', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///fileArchive.db'
@@ -44,9 +43,10 @@ def index():
             #return redirect("/")
             return "Error! Could not add file!"
     else:
-        allFiles=FileUploadModel.query.order_by(FileUploadModel.date_created)
+        page = request.args.get('page', 1, type=int)
+        allFiles=FileUploadModel.query.order_by(FileUploadModel.date_created).paginate(page=page, per_page=5)
         return render_template('index.html',files=allFiles)
-
+    
 
 # Delete files
 @app.route("/delete/<int:id>")
@@ -77,7 +77,6 @@ def update(id):
     else:
         return render_template('update.html', updatetFile=updatetFile)
     
-
 
 # Download files
 @app.route("/download/<int:id>", methods=['GET', 'POST'])
