@@ -9,13 +9,13 @@
                 <th>Uploaded buy</th>
                 <th>Date</th>
             </tr>
-            {% for file in files %}
-            <tr id="updateBtn">
-                <td><i class="far fa-file-pdf"></i></td>
-                <td>{{file.filename}}</td>
+            {% for file in files.items %}
+            <tr>
+                <td class="fileType {{file.filename.split(".")[1]}}"></td>
+                <td>{{file.filename.split(".")[0]}}</td>
                 <td>{{file.description}}</td>
                 <td>{{file.name}}</td>
-                <td>{{file.date_created}}</td>
+                <td>{{file.date_created.strftime('%Y-%m-%d')}}</td>
                 <td>
                     <button id="delBtn"><a href="/delete/{{file.id}}"><i class="fas fa-trash-alt"></i></a></button>
                     <button id="editBtn"><a href="/update/{{file.id}}"><i class="fas fa-edit"></i></a></button>
@@ -24,7 +24,18 @@
             </tr>
             {% endfor %}
         </table>
-        <p>page 1.2.3</p>
+
+        <!-- Pagination -->
+        <div>
+            <span>Page: </span>
+            {% for page_num in files.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                {% if page_num %}
+                    <a class="pageNum" href="{{url_for('index', page=page_num)}}">{{page_num}}</a>
+                {% else %}
+                ...
+                {% endif %}
+            {% endfor %}
+        </div>
 
         <!-- Trigger/Open Upload Modal -->
         <button id="modalBtn">Upload file</button>
@@ -35,7 +46,7 @@
         <div class="modal-content">
         <span class="close">&times;</span>
         <form method="POST" action="/" id="formSubmission" enctype="multipart/form-data">
-            <input id="fileBtn" type="file" name="file" />
+            <input id="fileBtn" type="file" name="file" accept=".jpg,.jpeg,.pdf,.xml">
             <span>Description</span>
             <input id="description" type="text"name="description">
             <span>Uploaded buy</span>
