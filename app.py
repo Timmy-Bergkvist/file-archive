@@ -29,8 +29,20 @@ class FileUploadModel(db.Model):
 # Add files
 @app.route("/", methods=['POST', 'GET'])
 def index():
-    
-    return render_template('index.html')
+    if request.method =='POST':
+        file = request.files['file']
+        name=request.form['name']
+        description=request.form['description']
+        files=FileUploadModel(name=name, description=description, filename=file.filename, data=file.read())
+        try:
+            db.session.add(files)
+            db.session.commit()
+            return redirect('/')
+        except:
+            return "Error! Could not add file!"
+    else:
+        allFiles=FileUploadModel.query.order_by(FileUploadModel.date_created)
+        return render_template('index.html',files=allFiles)
 
 
 # Delete files
