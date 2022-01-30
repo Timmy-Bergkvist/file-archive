@@ -1,0 +1,13 @@
+{% extends "base.html" %} 
+{% block content %}
+    <div class="container">
+        <h1>Update your description and name</h1>
+        <form action="/update/{{updatetFile.id}}" id="formSubmission" method="POST">
+            <span>Description</span>
+            <input type="text"name="description" id="description" value="{{updatetFile.description}}">
+            <span>Name</span>
+            <input type="text" name="name" id="name" value="{{updatetFile.name}}">
+        <button type="submit">Update</button>
+        </form>
+    </div>
+{% endblock %}

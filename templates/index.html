@@ -1,8 +1,47 @@
 {% extends "base.html" %} 
 {% block content %}
+    <div>
+        <table>
+            <tr>
+                <th></th>
+                <th>Filename</th>
+                <th>Description</th>
+                <th>Uploaded buy</th>
+                <th>Date</th>
+            </tr>
+            {% for file in files %}
+            <tr id="updateBtn">
+                <td><i class="far fa-file-pdf"></i></td>
+                <td>{{file.filename}}</td>
+                <td>{{file.description}}</td>
+                <td>{{file.name}}</td>
+                <td>{{file.date_created}}</td>
+                <td>
+                    <button id="delBtn"><a href="/delete/{{file.id}}"><i class="fas fa-trash-alt"></i></a></button>
+                    <button id="editBtn"><a href="/update/{{file.id}}"><i class="fas fa-edit"></i></a></button>
+                    <button id="downloadBtn"><a href="{{ url_for('download', filename="file.id")}}"><i class="fas fa-download"></i></a></button>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <p>page 1.2.3</p>
 
-<div>
-    <h1>Hello World</h1>
-</div>
+        <!-- Trigger/Open Upload Modal -->
+        <button id="modalBtn">Upload file</button>
+    </div>
 
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+        <span class="close">&times;</span>
+        <form method="POST" action="/" id="formSubmission" enctype="multipart/form-data">
+            <input id="fileBtn" type="file" name="file" />
+            <span>Description</span>
+            <input id="description" type="text"name="description">
+            <span>Uploaded buy</span>
+            <input id="userName" type="text" name="name" id="name">
+            <button id="uploadBtn" type="submit" value="Upload">Upload file</button>
+        </form>
+        </div>
+    </div>
 {% endblock %}

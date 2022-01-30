@@ -5,24 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
   <title>file-archive</title>
-
+  <link rel="stylesheet" type="text/css" href="//use.fontawesome.com/releases/v5.7.2/css/all.css">
   <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css"/>
+  <link rel="stylesheet" href="{{url_for('static', filename='css/modal.css')}}" type="text/css"/>
 </head>
 
 <body>
     <header> 
-        <div>
+        <div class="container topnav">
             
         </div>
     </header>
  
-    <main>
-        <div class="sidenav-close">
+    <main id="wrapper">
+        <div>
             {% block content %}
-            
             {% endblock %}
         </div>
     </main>
 
+    <!-- <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                  
+                </div>
+            </div>
+        </div>
+    </footer> -->
+
+     <!-- Js script -->
+  <script src="{{url_for('static', filename='js/modal.js')}}"></script>
   </body>
 </html>
