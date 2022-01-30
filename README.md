@@ -1,8 +1,8 @@
 # file-archive-project
 
-**Local deployment**
+**Local setup**
 
-The following instructions are based on Windows 10 and VS Code editor.
+The following instructions are based on Windows 10 and VS Code editor. To run this project you need to install Python
 
 
   I.    Clone the repository in Github
@@ -27,14 +27,17 @@ pip install flask_sqlalchemy
 ```
 
   V.   Database setup
-  1: Open your terminal and type python and hit Enter
-  2: in the terminal type from app import db and hit enter
-  3: next type db.create_all() and hit enter
+ 
+1: Open your terminal and type `python` and hit Enter
+
+2: In the terminal type `from app import db` and hit enter
+
+3: Next type `db.create_all()` and hit enter
 ```shell
 >>> from app import db
 >>> db.create_all()
 ```
-  4: when that done type exit() and hit enter
+  4: When that is done type `exit()` and hit enter
 ```shell
 >>> exit()
 ```
