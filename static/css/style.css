@@ -1,0 +1,102 @@
+
+* {
+    box-sizing: border-box;
+}
+  
+body {
+  background-size: 52rem 40rem;
+  background-color: rgb(162, 162, 162);
+  height: 100%;
+  margin: 0;
+}
+
+#wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 4%;
+}
+
+td, th {
+  border: none;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+/* Fontawesome fonts*/
+.fas {
+    color: #ffffff;
+  }
+
+.container {
+  margin-top: 4%;
+}
+
+#delBtn {
+  background-color: #000000;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  height: 24px;
+  width: 30px;
+  line-height: 17px;
+  margin: 1px 1px;
+}
+
+#editBtn {
+  background-color: #000000;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  height: 24px;
+  width: 30px;
+  line-height: 17px;
+  margin: 1px 1px;
+}
+
+#downloadBtn {
+  background-color: #000000;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  height: 24px;
+  width: 30px;
+  line-height: 17px;
+  margin: 1px 1px;
+}
+
+#modalBtn {
+  border: none;
+  color: rgb(243 243 243);
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 5px 5px;
+  cursor: pointer;
+  background-color: #717171;
+}
+
+#uploadBtn {
+  border: none;
+  color: rgb(243 243 243);
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 5px 5px;
+  cursor: pointer;
+  background-color: #717171;
+}
