@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, send_from_directory, current_app
+from io import BytesIO
+from flask import Flask, render_template, request, redirect, send_file, flash, send_from_directory, current_app
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -39,6 +40,8 @@ def index():
             db.session.commit()
             return redirect('/')
         except:
+            #flash('Error! Could not add file!')
+            #return redirect("/")
             return "Error! Could not add file!"
     else:
         allFiles=FileUploadModel.query.order_by(FileUploadModel.date_created)
@@ -68,6 +71,8 @@ def update(id):
             db.session.commit()
             return redirect("/")
         except:
+            #flash("Error! Could not update file!", "info")
+            #return redirect("/")
             return "Error! Could not update file!"
     else:
         return render_template('update.html', updatetFile=updatetFile)
@@ -75,10 +80,10 @@ def update(id):
 
 
 # Download files
-@app.route('/uploads/<path:filename>', methods=['GET', 'POST'])
-def download(filename):
-    
-    return send_from_directory()
+@app.route("/download/<int:id>", methods=['GET', 'POST'])
+def download(id):
+    upload = FileUploadModel.query.filter_by(id=id).first()
+    return send_file(BytesIO(upload.data), attachment_filename=upload.filename, as_attachment=True)
 
 if __name__ == "__main__":
     app.run(debug=True)

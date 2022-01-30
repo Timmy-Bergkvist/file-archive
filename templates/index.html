@@ -19,7 +19,7 @@
                 <td>
                     <button id="delBtn"><a href="/delete/{{file.id}}"><i class="fas fa-trash-alt"></i></a></button>
                     <button id="editBtn"><a href="/update/{{file.id}}"><i class="fas fa-edit"></i></a></button>
-                    <button id="downloadBtn"><a href="{{ url_for('download', filename="file.id")}}"><i class="fas fa-download"></i></a></button>
+                    <button id="downloadBtn"><a href="/download/{{file.id}}"><i class="fas fa-download"></i></a></button>
                 </td>
             </tr>
             {% endfor %}
