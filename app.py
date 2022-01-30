@@ -57,8 +57,20 @@ def delete(id):
 # Update files
 @app.route("/update/<int:id>",methods=['POST', 'GET'])
 def update(id):
-    
-    return render_template('update.html')
+    updatetFile = FileUploadModel.query.get_or_404(id)
+    if request.method == 'POST':
+        updatetFile = FileUploadModel.query.filter_by(id=id).first()
+        name = request.form['name']
+        description = request.form['description']
+        updatetFile.name=name
+        updatetFile.description=description
+        try:
+            db.session.commit()
+            return redirect("/")
+        except:
+            return "Error! Could not update file!"
+    else:
+        return render_template('update.html', updatetFile=updatetFile)
     
 
 
