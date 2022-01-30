@@ -48,7 +48,9 @@ def index():
 # Delete files
 @app.route("/delete/<int:id>")
 def delete(id):
-    
+    deleteFile = FileUploadModel.query.filter_by(id=id).first()
+    db.session.delete(deleteFile)
+    db.session.commit()
     return redirect("/")
     
 
